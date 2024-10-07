@@ -9,9 +9,9 @@ def isValidChessBoard(board):
 
     # Dictionary to count the number of pieces
     piece_count = {
-        'wking': 0, 'bking': 0,
-        'wpawn': 0, 'bpawn': 0,
-        'wtotal': 0, 'btotal': 0
+        'w_king': 0, 'b_king': 0,
+        'w_pawn': 0, 'b_pawn': 0,
+        'w_total': 0, 'b_total': 0
     }
 
     # Define valid piece types
@@ -24,21 +24,21 @@ def isValidChessBoard(board):
             return False
 
         # Check if the piece name is valid
-        if len(piece) < 2 or piece[0] not in ('w', 'b') or piece[1:] not in valid_piece_types:
+        if len(piece) < 2 or piece[:2] not in ('w_', 'b_') or piece[2:] not in valid_piece_types:
             return False
 
         # Update the piece counts
-        piece_count[piece] = piece_count.get(piece, 0) + 1  # Count specific piece
-        if piece[1:] == 'pawn':
-            piece_count[piece[0] + 'pawn'] += 1  # Count pawns
-        piece_count[piece[0] + 'total'] += 1  # Count total pieces per color
+        piece_count[piece] = piece_count.get(piece, 0) + 1  # Count the specific piece
+        if piece[2:] == 'pawn':
+            piece_count[piece[:2] + 'pawn'] += 1  # Count pawns
+        piece_count[piece[:2] + 'total'] += 1  # Count total pieces per color
 
     # Validate the piece counts
-    if piece_count['wking'] != 1 or piece_count['bking'] != 1:
+    if piece_count['w_king'] != 1 or piece_count['b_king'] != 1:
         return False
-    if piece_count['wtotal'] > 16 or piece_count['btotal'] > 16:
+    if piece_count['w_total'] > 16 or piece_count['b_total'] > 16:
         return False
-    if piece_count['wpawn'] > 8 or piece_count['bpawn'] > 8:
+    if piece_count['w_pawn'] > 8 or piece_count['b_pawn'] > 8:
         return False
 
     return True
@@ -46,8 +46,11 @@ def isValidChessBoard(board):
 
 # Example usage
 chess_board = {
-    '1h': 'bking', '6c': 'wqueen', '2g': 'bbishop',
-    '5h': 'bqueen', '3e': 'wking'
+    '1h': 'b_king', '6c': 'w_queen', '2g': 'b_bishop',
+    '5h': 'b_queen', '3e': 'w_king'
 }
 
 print(isValidChessBoard(chess_board))  # Output: True or False
+
+# Define the board
+#
