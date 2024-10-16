@@ -38,18 +38,18 @@ num_questions = 50
 os.makedirs('quizzes', exist_ok = True)
 os.makedirs('answers', exist_ok = True)
 for quizNum in range(1, num_quizzes + 1):
-    # TODO: Create the quiz and answer key files
+    #  Create the quiz and answer key files
     quiz_filename = f'quizzes/capitalsquiz{quizNum}.txt'
     answer_key_filename = f'answers/capitalsquiz_answers{quizNum}.txt'
     with open(quiz_filename, 'w') as quizFile, open(answer_key_filename, 'w') as answerKeyFile:
-        # TODO: Write out the head for the quiz.
+        #  Write out the head for the quiz.
         quizFile.write('Name:\n\nDate:\n\nPeriod:\n\n')
         quizFile.write((' ' * 20) + f'State Capitals Quiz (Form {quizNum})')
         quizFile.write('\n\n')
-        # TODO: Shuffle the order of the states.
+        # Shuffle the order of the states.
         states = list(capitals.keys())
         random.shuffle(states)
-        # TODO: Loop through all 50 states, making a question for each.
+        # Loop through all 50 states, making a question for each.
         for questionNum in range(num_questions):
             state = states[questionNum]
             correctAnswer = capitals[state]
@@ -58,11 +58,11 @@ for quizNum in range(1, num_quizzes + 1):
             wrongAnswers = random.sample(wrongAnswers, 3)
             answerOptions = wrongAnswers + [correctAnswer]
             random.shuffle(answerOptions)
-            # TODO: Write the question and answer options to the quiz file.
+            # Write the question and answer options to the quiz file.
             quizFile.write(f'{questionNum + 1}. What is the capital of {state}?\n')
             for i in range(4):
                 quizFile.write(f"\t{'ABCD'[i]}. { answerOptions[i]}\n")
             quizFile.write('\n')
-            # TODO: Write the answer key to a file.
+            # Write the answer key to a file.
             correct_option = 'ABCD'[answerOptions.index(correctAnswer)]
             answerKeyFile.write(f"{questionNum + 1}. {correct_option}\n")
